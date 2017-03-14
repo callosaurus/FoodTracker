@@ -40,7 +40,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // Enable the Save button only if the text field has a valid Meal name.
         checkValidMealName()
     }
-
+    
     //MARK: UITextFieldDelegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -49,13 +49,11 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     func checkValidMealName() {
-        // Disable the Save button if the text field is empty.
         let text = nameTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Hide the keyboard.
         textField.resignFirstResponder()
         return true
     }
@@ -74,10 +72,8 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         // The info dictionary contains multiple representations of the image, and this uses the original.
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
         // Set photoImageView to display the selected image.
         photoImageView.image = selectedImage
-        
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
     }
@@ -86,7 +82,6 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
         let isPresentingInAddMealMode = presentingViewController is UINavigationController
-        
         if isPresentingInAddMealMode {
             dismiss(animated: true, completion: nil)
         }
@@ -107,18 +102,10 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     
     //MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
-        // Hide the keyboard.
         nameTextField.resignFirstResponder()
-        
-        // UIImagePickerController is a view controller that lets a user pick media from their photo library.
         let imagePickerController = UIImagePickerController()
-        
-        // Only allow photos to be picked, not taken.
         imagePickerController.sourceType = .photoLibrary
-        
-        // Make sure ViewController is notified when the use picks an image.
         imagePickerController.delegate = self
-        
         present(imagePickerController, animated: true, completion: nil)
     }
 
